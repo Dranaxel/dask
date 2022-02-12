@@ -528,7 +528,7 @@ def test_apply_and_enforce_message():
 
 def test_nonempty_series_sparse():
     ser = pd.Series(pd.array([0, 1], dtype="Sparse"))
-    with pytest.warns(None) as w:
+    with pytest.warns as w:
         meta_nonempty(ser)
 
     assert len(w) == 0

@@ -334,7 +334,7 @@ def test_categorize_nan():
     df = dd.from_pandas(
         pd.DataFrame({"A": ["a", "b", "a", float("nan")]}), npartitions=2
     )
-    with pytest.warns(None) as record:
+    with pytest.warns as record:
         df.categorize().compute()
     assert len(record) == 0
 

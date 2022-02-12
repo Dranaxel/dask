@@ -140,12 +140,12 @@ def test_unary_ufunc(ufunc):
     arr = np.random.randint(1, 100, size=(20, 20))
     darr = da.from_array(arr, 3)
 
-    with pytest.warns(None):  # some invalid values (arccos, arcsin, etc.)
+    with pytest.warns:  # some invalid values (arccos, arcsin, etc.)
         # applying Dask ufunc doesn't trigger computation
         assert isinstance(dafunc(darr), da.Array)
         assert_eq(dafunc(darr), npfunc(arr), equal_nan=True)
 
-    with pytest.warns(None):  # some invalid values (arccos, arcsin, etc.)
+    with pytest.warns:  # some invalid values (arccos, arcsin, etc.)
         # applying NumPy ufunc is lazy
         if isinstance(npfunc, np.ufunc):
             assert isinstance(npfunc(darr), da.Array)
@@ -153,7 +153,7 @@ def test_unary_ufunc(ufunc):
             assert isinstance(npfunc(darr), np.ndarray)
         assert_eq(npfunc(darr), npfunc(arr), equal_nan=True)
 
-    with pytest.warns(None):  # some invalid values (arccos, arcsin, etc.)
+    with pytest.warns:  # some invalid values (arccos, arcsin, etc.)
         # applying Dask ufunc to normal ndarray triggers computation
         assert isinstance(dafunc(arr), np.ndarray)
         assert_eq(dafunc(arr), npfunc(arr), equal_nan=True)
@@ -186,14 +186,14 @@ def test_binary_ufunc(ufunc):
     assert isinstance(dafunc(darr1, 10), da.Array)
     assert_eq(dafunc(darr1, 10), npfunc(arr1, 10))
 
-    with pytest.warns(None):  # overflow in ldexp
+    with pytest.warns:  # overflow in ldexp
         assert isinstance(dafunc(10, darr1), da.Array)
         assert_eq(dafunc(10, darr1), npfunc(10, arr1))
 
     assert isinstance(dafunc(arr1, 10), np.ndarray)
     assert_eq(dafunc(arr1, 10), npfunc(arr1, 10))
 
-    with pytest.warns(None):  # overflow in ldexp
+    with pytest.warns:  # overflow in ldexp
         assert isinstance(dafunc(10, arr1), np.ndarray)
         assert_eq(dafunc(10, arr1), npfunc(10, arr1))
 

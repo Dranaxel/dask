@@ -85,7 +85,7 @@ def check_pandas_issue_45618_warning(test_func):
     # See https://github.com/pandas-dev/pandas/issues/45618 for more details.
 
     def decorator():
-        with pytest.warns(None) as record:
+        with pytest.warns as record:
             test_func()
 
         if PANDAS_VERSION == parse_version("1.4.0"):

@@ -605,11 +605,11 @@ def test_take_npartitions_warn():
         with pytest.warns(UserWarning):
             b.take(7)
 
-        with pytest.warns(None) as rec:
+        with pytest.warns as rec:
             b.take(7, npartitions=2)
         assert len(rec) == 0
 
-        with pytest.warns(None) as rec:
+        with pytest.warns as rec:
             b.take(7, warn=False)
         assert len(rec) == 0
 
@@ -962,7 +962,7 @@ def test_to_textfiles_name_function_warn():
     ]
     a = db.from_sequence(seq, npartitions=16)
     with tmpdir() as dn:
-        with pytest.warns(None):
+        with pytest.warns:
             a.to_textfiles(dn, name_function=str)
 
 

@@ -784,7 +784,7 @@ def test_slicing_integer_no_warnings():
     # https://github.com/dask/dask/pull/2457/
     X = da.random.random((100, 2), (2, 2))
     idx = np.array([0, 0, 1, 1])
-    with pytest.warns(None) as rec:
+    with pytest.warns as rec:
         X[idx].compute()
     assert len(rec) == 0
 
@@ -887,14 +887,14 @@ def test_getitem_avoids_large_chunks():
 
         # Users can silence the warning
         with dask.config.set({"array.slicing.split-large-chunks": False}):
-            with pytest.warns(None) as e:
+            with pytest.warns as e:
                 result = arr[indexer]
             assert len(e) == 0
             assert_eq(result, expected)
 
         # Users can silence the warning
         with dask.config.set({"array.slicing.split-large-chunks": True}):
-            with pytest.warns(None) as e:
+            with pytest.warns as e:
                 result = arr[indexer]
             assert len(e) == 0  # no
             assert_eq(result, expected)

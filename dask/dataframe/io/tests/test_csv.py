@@ -774,7 +774,7 @@ def test_warn_non_seekable_files():
         assert "gzip" in msg
         assert "blocksize=None" in msg
 
-        with pytest.warns(None) as w:
+        with pytest.warns as w:
             df = dd.read_csv("2014-01-*.csv", compression="gzip", blocksize=None)
         assert len(w) == 0
 

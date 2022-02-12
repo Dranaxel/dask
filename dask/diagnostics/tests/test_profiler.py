@@ -237,7 +237,7 @@ def test_profiler_plot():
     assert p.title.text == "Not the default"
     # Test empty, checking for errors
     prof.clear()
-    with pytest.warns(None) as record:
+    with pytest.warns as record:
         prof.visualize(show=False, save=False)
 
     assert len(record) == 0
@@ -270,7 +270,7 @@ def test_resource_profiler_plot():
     rprof.clear()
     for results in [[], [(1.0, 0, 0)]]:
         rprof.results = results
-        with pytest.warns(None) as record:
+        with pytest.warns as record:
             p = rprof.visualize(show=False, save=False)
         assert len(record) == 0
         # Check bounds are valid
@@ -306,7 +306,7 @@ def test_cache_profiler_plot():
     assert p.axis[1].axis_label == "Cache Size (non-standard)"
     # Test empty, checking for errors
     cprof.clear()
-    with pytest.warns(None) as record:
+    with pytest.warns as record:
         cprof.visualize(show=False, save=False)
 
     assert len(record) == 0

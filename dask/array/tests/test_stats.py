@@ -85,7 +85,7 @@ def test_two(kind, kwargs):
     dask_test = getattr(dask.array.stats, kind)
     scipy_test = getattr(scipy.stats, kind)
 
-    with pytest.warns(None):  # maybe overflow warning (powrer_divergence)
+    with pytest.warns:  # maybe overflow warning (powrer_divergence)
         result = dask_test(a_, b_, **kwargs)
         expected = scipy_test(a, b, **kwargs)
 
